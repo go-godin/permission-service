@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+service PermissionService {
+    rpc Set(SetRequest) returns (SetResponse);
+    rpc Get(GetRequest) returns (GetResponse);
+    rpc Has(HasRequest) returns (HasResponse);
+}
+
+message Permission {
+    string name = 1;
+}
+
+message SetRequest {
+    // the identifier is the key to which the permissions are associated
+    string identifier = 1;
+    repeated Permission permissions = 2;
+}
+message SetResponse {}
+
+message GetRequest {
+    string identifier = 1;
+}
+message GetResponse {
+    repeated Permission permissions = 1;
+}
+
+message HasRequest {
+    string identifier = 1;
+    Permission permission = 2;
+}
+message HasResponse {
+    bool hasPermission = 1;
+}
